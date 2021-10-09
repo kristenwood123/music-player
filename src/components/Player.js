@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { FaPlay } from 'react-icons/fa'
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from 'react-icons/md'
+import { IoMdPause } from 'react-icons/io'
 
 
 
@@ -9,8 +10,8 @@ const Player = ({ currentSong, isPlaying, setIsPlaying }) => {
   const audioRef = useRef(null)
 
   const [songInfo, setSongInfo] = useState({
-    currentTime: null,
-    duration: null
+    currentTime: 0,
+    duration: 0
   })
 
 
@@ -36,21 +37,39 @@ const Player = ({ currentSong, isPlaying, setIsPlaying }) => {
     }
   }  
 
+  const handleDrag = e => {
+    audioRef.current.currentTime = e.target.value;
+    setSongInfo({...songInfo, currentTime: e.target.value})
+  }
+
   return (
     <div className='player'>
       <div className="time-control">
         <p>{getTime(songInfo.currentTime)}</p>
-        <input type="range" />
+        <input 
+          min={0} 
+          max={songInfo.duration} 
+          type="range"
+          value={songInfo.currentTime}
+          onChange={handleDrag} />
         <p>{getTime(songInfo.duration)}</p>
       </div>
       <div className="play-control">
         <MdKeyboardArrowLeft className='icon back'/>
-        <FaPlay 
+          {!isPlaying ? <FaPlay 
+          className='icon play'
+          onClick={handlePlaySong}/> : 
+        <IoMdPause
           className='icon play'
           onClick={handlePlaySong}/>
+          }
         <MdKeyboardArrowRight className='icon forward'/>
       </div>
-      <audio onTimeUpdate={handleTimeUpdate} ref={audioRef} src={audio}></audio>
+      <audio 
+        onTimeUpdate={handleTimeUpdate} 
+        ref={audioRef} 
+        src={audio}
+        onLoadedMetadata={handleTimeUpdate}></audio>
     </div>
   )
 }
