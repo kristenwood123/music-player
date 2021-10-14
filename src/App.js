@@ -44,6 +44,7 @@ const [songInfo, setSongInfo] = useState({
         setCurrentSong={setCurrentSong}
         audioRef={audioRef}
         isPlaying={isPlaying}
+        setSongs={setSongs}
         />
       <audio 
         onTimeUpdate={handleTimeUpdate} 
