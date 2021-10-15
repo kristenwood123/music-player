@@ -6,14 +6,22 @@
   justify-content: space-between;
 }
 
+.song-container {
+  h3 {
+    margin-bottom: 1rem;
+  }
+}
+
 .time-control {
   width: 50%;
   display: flex;
   input {
     width: 100%;
     padding: 1rem 0rem;
+    -webkit-appearance: none;
+    background-color: transparent;
+    cursor: pointer;
   }
-
   p {
     padding: 1rem;
   }
@@ -26,6 +34,10 @@
   padding: 1rem;
   width: 30%;
 
+  svg {
+    cursor: pointer;
+  }
+
   .icon {
     font-size: 30px;
     cursor: pointer;
@@ -34,5 +46,44 @@
   .icon:hover {
     transform: scale(1.2);
     transition: 0.2s ease-in;
+  }
+}
+
+.track {
+  width: 100%;
+  height: 1rem;
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  margin-top: 1.15rem;
+}
+
+.animate-track {
+  background: rgb(204, 204, 204);
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateX(0%);
+  padding: 1rem;
+  pointer-events: none;
+}
+
+input[type="range"]:focus {
+  outline: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 16px;
+  width: 16px;
+}
+
+@media screen and (max-width: 768px) {
+  .time-control {
+    width: 90%;
+  }
+  .play-control {
+    width: 80%;
   }
 }
