@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Song = ({ currentSong }) => {
-  const { name, cover, artist, audio, color, id, active } = currentSong
+  const { name, cover, artist } = currentSong
   return (
     <div className='song-container'>
       <img src={cover} alt={name} />

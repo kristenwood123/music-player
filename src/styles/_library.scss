@@ -8,6 +8,9 @@
   overflow: scroll;
   background: white;
   overflow: scroll;
+  transform: translateX(-100%);
+  transition: all 0.5s ease;
+  opacity: 0;
 
   h2 {
     padding: 2rem;
@@ -58,5 +61,10 @@
 }
 
 .selected {
-  background-color: violet;
+  background-color: rgb(248, 188, 208);
+}
+
+.active-library {
+  transform: translateX(0%);
+  opacity: 1;
 }

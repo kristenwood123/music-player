@@ -1,11 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { FaPlay } from 'react-icons/fa'
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from 'react-icons/md'
 import { IoMdPause } from 'react-icons/io'
 
-
-
-const Player = ({ isPlaying, setIsPlaying, audioRef, songInfo, setSongInfo }) => {
+const Player = ({ isPlaying, currentSong, setCurrentSong, songs, setIsPlaying, audioRef, songInfo, setSongInfo }) => {
  
   const getTime = (time) => {
     return (
@@ -28,28 +26,47 @@ const Player = ({ isPlaying, setIsPlaying, audioRef, songInfo, setSongInfo }) =>
     setSongInfo({...songInfo, currentTime: e.target.value})
   }
 
+  const handleSkipTrack = (direction) => {
+     let currentIndex = songs.indexOf(currentSong)
+     if(direction === 'skip-forward') {
+       setCurrentSong(songs[(currentIndex + 1) % songs.length])
+       console.log('nextSong', currentSong);
+     }
+     if(direction === 'skip-back') {
+       if((currentIndex - 1) % songs.length === -1) {
+       setCurrentSong(songs[songs.length -1])
+       return;
+     }
+     setCurrentSong(songs[(currentIndex - 1) % songs.length])
+  }
+}
+
   return (
     <div className='player'>
       <div className="time-control">
         <p>{getTime(songInfo.currentTime)}</p>
         <input 
           min={0} 
-          max={songInfo.duration} 
+          max={songInfo.duration || 0} 
           type="range"
           value={songInfo.currentTime}
           onChange={handleDrag} />
         <p>{getTime(songInfo.duration)}</p>
       </div>
       <div className="play-control">
-        <MdKeyboardArrowLeft className='icon back'/>
+        <MdKeyboardArrowLeft 
+            onClick={() => handleSkipTrack('skip-back')}
+            className='icon back'/>
           {!isPlaying ? <FaPlay 
           className='icon play'
           onClick={handlePlaySong}/> : 
         <IoMdPause
-          className='icon play'
+          className='icon pause'
           onClick={handlePlaySong}/>
           }
-        <MdKeyboardArrowRight className='icon forward'/>
+        <MdKeyboardArrowRight 
+            onClick={() => handleSkipTrack('skip-forward')}
+            className='icon forward'/>
       </div>
     </div>
   )
