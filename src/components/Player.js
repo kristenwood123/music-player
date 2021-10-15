@@ -2,9 +2,12 @@ import React from 'react'
 import { FaPlay } from 'react-icons/fa'
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from 'react-icons/md'
 import { IoMdPause } from 'react-icons/io'
+import { useGlobalContext } from '../context'
 
 
-const Player = ({ isPlaying, currentSong, setCurrentSong, songs, setIsPlaying, audioRef, songInfo, setSongInfo }) => {
+const Player = () => {
+
+const { isPlaying, currentSong, setCurrentSong, songs, setIsPlaying, audioRef, songInfo, setSongInfo } = useGlobalContext()
 
   // Event Handlers
   const handlePlaySong = () => {

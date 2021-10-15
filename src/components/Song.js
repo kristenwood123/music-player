@@ -1,7 +1,10 @@
 import React from 'react'
+import { useGlobalContext } from '../context'
 
-const Song = ({ currentSong }) => {
+const Song = () => {
+  const { currentSong } = useGlobalContext() 
   const { name, cover, artist } = currentSong
+
   return (
     <div className='song-container'>
       <img src={cover} alt={name} />

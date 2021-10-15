@@ -1,7 +1,9 @@
 import React from 'react'
 import LibrarySong from './LibrarySong'
+import { useGlobalContext } from '../context'
 
-const Library = ({ songs, currentSong, setCurrentSong, setSongs, libraryStatus }) => {
+const Library = () => {
+  const { songs, currentSong, setCurrentSong, setSongs, libraryStatus } = useGlobalContext()
   return (
     <div className={`library ${libraryStatus ? 'active-library' : ''}`}>
       <h2>Library</h2>
