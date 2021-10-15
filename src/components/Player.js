@@ -1,17 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { FaPlay } from 'react-icons/fa'
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from 'react-icons/md'
 import { IoMdPause } from 'react-icons/io'
 
 
 const Player = ({ isPlaying, currentSong, setCurrentSong, songs, setIsPlaying, audioRef, songInfo, setSongInfo }) => {
- 
-
-  const getTime = (time) => {
-    return (
-      Math.floor(time / 60) + ":" + ("0" + Math.floor(time % 60)).slice(-2)
-    )
-  }
 
   // Event Handlers
   const handlePlaySong = () => {
@@ -24,22 +17,26 @@ const Player = ({ isPlaying, currentSong, setCurrentSong, songs, setIsPlaying, a
     }
   }  
 
+  const getTime = (time) => {
+    return (
+      Math.floor(time / 60) + ":" + ("0" + Math.floor(time % 60)).slice(-2)
+    )
+  }
+
   const handleDrag = e => {
     audioRef.current.currentTime = e.target.value;
     setSongInfo({...songInfo, currentTime: e.target.value})
   }
 
-
   const handleSkipTrack = async (direction) => {
      let currentIndex = songs.indexOf(currentSong)
      if(direction === 'skip-forward') {
       await setCurrentSong(songs[(currentIndex + 1) % songs.length])
-       
      }
      if(direction === 'skip-back') {
        if((currentIndex - 1) % songs.length === -1) {
-        await setCurrentSong(songs[songs.length -1])
-       if(isPlaying) audioRef.current.play()
+        await setCurrentSong(songs[songs.length - 1])
+        if(isPlaying) audioRef.current.play()
        return;
      }
      await setCurrentSong(songs[(currentIndex - 1) % songs.length])

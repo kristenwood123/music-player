@@ -12,6 +12,7 @@ const Library = ({ songs, currentSong, setCurrentSong, setSongs, libraryStatus }
           song={song} 
           setCurrentSong={setCurrentSong}
           key={song.id}
+          id={song.id}
           setSongs={setSongs}
           currentSong={currentSong} />
           )}

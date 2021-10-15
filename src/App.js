@@ -43,7 +43,7 @@ const handleTimeUpdate = e => {
     if(isPlaying) audioRef.current.play()
   }
   return (
-    <div className="App">
+    <div className={`${libraryStatus ? "library-active" : ""}`}>
       <Navbar 
         libraryStatus={libraryStatus}
         setLibraryStatus={setLibraryStatus}

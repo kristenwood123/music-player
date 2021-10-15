@@ -1,12 +1,12 @@
 import React from 'react'
 
 
-const LibrarySong = ({ song, songs, setCurrentSong, audioRef, isPlaying, setSongs }) => {
+const LibrarySong = ({ song, songs, setCurrentSong, currentSong, audioRef, isPlaying, setSongs }) => {
   const { name, cover, artist, id, active } = song
 
   const handleSelectSong = async () => {
     const selectedSong = songs.filter((state) => state.id === id);
-     await setCurrentSong({ ...selectedSong[0] });
+     await setCurrentSong(selectedSong[0]);
 
     //Active State
     const newSongs = songs.map((song) => {
@@ -29,7 +29,7 @@ const LibrarySong = ({ song, songs, setCurrentSong, audioRef, isPlaying, setSong
   }
   return (
     <div 
-      className={`library-song ${active ? 'selected' : ''}`} 
+      className={`library-song ${song.id === currentSong.id ? "selected" : ""}`} 
       onClick={handleSelectSong}>
       <img src={cover} alt={name} />
       <div className="song-description">
