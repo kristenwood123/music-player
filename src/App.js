@@ -31,8 +31,6 @@ const handleTimeUpdate = e => {
     setSongInfo({...songInfo, currentTime: current, duration })
   }
 
-
-
  const { audio } = currentSong;
 
   return (
@@ -60,6 +58,7 @@ const handleTimeUpdate = e => {
         isPlaying={isPlaying}
         setSongs={setSongs}
         libraryStatus={libraryStatus}
+        currentSong={currentSong}
         />
       <audio 
         onTimeUpdate={handleTimeUpdate} 

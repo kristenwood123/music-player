@@ -2,15 +2,18 @@ import React from 'react'
 import { FaPlay } from 'react-icons/fa'
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from 'react-icons/md'
 import { IoMdPause } from 'react-icons/io'
+import { playAudio } from '../util'
 
 const Player = ({ isPlaying, currentSong, setCurrentSong, songs, setIsPlaying, audioRef, songInfo, setSongInfo }) => {
  
+
   const getTime = (time) => {
     return (
       Math.floor(time / 60) + ":" + ("0" + Math.floor(time % 60)).slice(-2)
     )
   }
 
+  // Event Handlers
   const handlePlaySong = () => {
     if(isPlaying) {
       audioRef.current.pause()
@@ -30,15 +33,17 @@ const Player = ({ isPlaying, currentSong, setCurrentSong, songs, setIsPlaying, a
      let currentIndex = songs.indexOf(currentSong)
      if(direction === 'skip-forward') {
        setCurrentSong(songs[(currentIndex + 1) % songs.length])
-       console.log('nextSong', currentSong);
+       
      }
      if(direction === 'skip-back') {
        if((currentIndex - 1) % songs.length === -1) {
        setCurrentSong(songs[songs.length -1])
+       playAudio(isPlaying, audioRef)
        return;
      }
      setCurrentSong(songs[(currentIndex - 1) % songs.length])
   }
+  playAudio(isPlaying, audioRef)
 }
 
   return (
@@ -51,7 +56,7 @@ const Player = ({ isPlaying, currentSong, setCurrentSong, songs, setIsPlaying, a
           type="range"
           value={songInfo.currentTime}
           onChange={handleDrag} />
-        <p>{getTime(songInfo.duration)}</p>
+        <p>{songInfo.duration ? getTime(songInfo.duration) : '0:00'}</p>
       </div>
       <div className="play-control">
         <MdKeyboardArrowLeft 
