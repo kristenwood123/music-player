@@ -2,7 +2,7 @@ import React from 'react'
 import { FaPlay } from 'react-icons/fa'
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from 'react-icons/md'
 import { IoMdPause } from 'react-icons/io'
-import { playAudio } from '../util'
+
 
 const Player = ({ isPlaying, currentSong, setCurrentSong, songs, setIsPlaying, audioRef, songInfo, setSongInfo }) => {
  
@@ -29,21 +29,22 @@ const Player = ({ isPlaying, currentSong, setCurrentSong, songs, setIsPlaying, a
     setSongInfo({...songInfo, currentTime: e.target.value})
   }
 
-  const handleSkipTrack = (direction) => {
+
+  const handleSkipTrack = async (direction) => {
      let currentIndex = songs.indexOf(currentSong)
      if(direction === 'skip-forward') {
-       setCurrentSong(songs[(currentIndex + 1) % songs.length])
+      await setCurrentSong(songs[(currentIndex + 1) % songs.length])
        
      }
      if(direction === 'skip-back') {
        if((currentIndex - 1) % songs.length === -1) {
-       setCurrentSong(songs[songs.length -1])
-       playAudio(isPlaying, audioRef)
+        await setCurrentSong(songs[songs.length -1])
+       if(isPlaying) audioRef.current.play()
        return;
      }
-     setCurrentSong(songs[(currentIndex - 1) % songs.length])
-  }
-  playAudio(isPlaying, audioRef)
+     await setCurrentSong(songs[(currentIndex - 1) % songs.length])
+    }
+    if(isPlaying) audioRef.current.play()
 }
 
 // Add styles

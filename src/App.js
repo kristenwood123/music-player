@@ -18,6 +18,7 @@ const [currentSong, setCurrentSong] = useState(songs[0])
 const [isPlaying, setIsPlaying] = useState(false)
 const audioRef = useRef(null)
 const [libraryStatus, setLibraryStatus] = useState(false)
+const { audio } = currentSong;
 
 const [songInfo, setSongInfo] = useState({
     currentTime: 0,
@@ -36,8 +37,11 @@ const handleTimeUpdate = e => {
     setSongInfo({...songInfo, currentTime: current, duration, animationPercentage: animation })
   }
 
- const { audio } = currentSong;
-
+  const handleSongEnd = async () => {
+    let currentIndex = songs.indexOf(currentSong)
+    await setCurrentSong(songs[(currentIndex + 1) % songs.length])
+    if(isPlaying) audioRef.current.play()
+  }
   return (
     <div className="App">
       <Navbar 
@@ -69,7 +73,8 @@ const handleTimeUpdate = e => {
         onTimeUpdate={handleTimeUpdate} 
         ref={audioRef} 
         src={audio}
-        onLoadedMetadata={handleTimeUpdate}>
+        onLoadedMetadata={handleTimeUpdate}
+        onEnded={handleSongEnd}>
       </audio>
     </div>
   )
