@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { FaPlay } from 'react-icons/fa'
 import { MdKeyboardArrowRight, MdKeyboardArrowLeft } from 'react-icons/md'
 import { IoMdPause } from 'react-icons/io'

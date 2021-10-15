@@ -77,7 +77,6 @@ function chillHop() {
       name: "Looking In",
       cover: "https://chillhop.com/wp-content/uploads/2021/08/af3ce13ad39d38057f00144f8a7c295877ccfec1-1024x1024.jpg",
       artist: "Smile High, Teddy Roxpin",
-      audio: '',
       id: uuidv4(),
       active: false,
       color: ["#428992", "#0E1548"],
