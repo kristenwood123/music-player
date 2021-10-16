@@ -32,7 +32,7 @@ const { isPlaying, currentSong, setCurrentSong, songs, setIsPlaying, audioRef, s
   }
 
   const handleSkipTrack = async (direction) => {
-     let currentIndex = songs.indexOf(currentSong)
+     let currentIndex = songs.findIndex((song) => song.id == currentSong.id)
      if(direction === 'skip-forward') {
       await setCurrentSong(songs[(currentIndex + 1) % songs.length])
      }
