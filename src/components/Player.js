@@ -38,6 +38,7 @@ const Player = () => {
     setSongInfo({ ...songInfo, currentTime: e.target.value });
   };
 
+  /*----------- Sample of Code -----------*/
   const handleSkipTrack = async (direction) => {
     try {
       let currentIndex = songs.findIndex((song) => song.id === currentSong.id);
@@ -57,6 +58,7 @@ const Player = () => {
       console.log(err);
     }
   };
+  /*----------- Sample of Code -----------*/
 
   // Add styles
   const trackAnim = {
