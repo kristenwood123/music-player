@@ -25,7 +25,6 @@ const LibrarySong = ({ song }) => {
     })
     setSongs(newSongs)
 
-    console.log('PLAYING:::',isPlaying,audioRef)
     // Check if the song is playing
    if(isPlaying) audioRef.current.play()
   }
