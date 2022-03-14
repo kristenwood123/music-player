@@ -1,7 +1,8 @@
-/// <reference types="cypress"/>
+/* eslint-disable no-undef */
+/// <reference types="cypress" />
 
 describe("asdas", () => {
   it("test one", () => {
-    throw new Error("oops");
+    cy.visit("https://codedamn.com");
   });
 });
